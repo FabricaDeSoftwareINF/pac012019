@@ -1,28 +1,24 @@
 package br.ufg.inf.fabrica.pac.dominio;
 
-/**
- * Foi definido que: 1 - Toda entidade possui um único atributo identificador,
- * ficando vetado a identificação por composição de atributos. 2 - Toda
- * referência ao objeto associado deve ser realizada feita identificando o
- * atributo como: "id" + nome da entidade (capitular). 3 -Todos objetos no módulo
- * domínio que não devem ser persistidos, devem ser comentados acima com a palavra
- * "Transient"
- */
 import br.ufg.inf.fabrica.pac.dominio.utils.UtilsValidacao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author danilloguimaraes
  */
+@Entity
 public class Pacote implements Validavel, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,9 +27,11 @@ public class Pacote implements Validavel, Serializable {
     private Long id;
     private String nome;
     private String descricao;
+    @Temporal(TemporalType.DATE)
     private Date dataCriacao;
     private boolean abandonado;
     private String documento;
+    @Temporal(TemporalType.DATE)
     private Date dataPrevistaRealizacao;
 
     @ManyToOne

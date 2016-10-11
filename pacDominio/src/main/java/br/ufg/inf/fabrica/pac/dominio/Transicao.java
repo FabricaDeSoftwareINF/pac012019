@@ -1,12 +1,23 @@
 package br.ufg.inf.fabrica.pac.dominio;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Danillo
  */
-public class Transicao {
+@Entity
+public class Transicao implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String descricao;
     private String regra;
@@ -20,6 +31,14 @@ public class Transicao {
 
     public Transicao() {
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescricao() {

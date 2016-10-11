@@ -1,6 +1,7 @@
 package br.ufg.inf.fabrica.pac.dominio;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.ManyToOne;
  *
  * @author Danillo
  */
+@Entity
 public class Membro implements Serializable {
 
     private static final long serialVersionUID = 1L;

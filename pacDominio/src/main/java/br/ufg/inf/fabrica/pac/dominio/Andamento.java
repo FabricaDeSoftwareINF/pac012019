@@ -1,64 +1,50 @@
 package br.ufg.inf.fabrica.pac.dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author danilloguimaraes
  */
-public class Andamento implements Validavel {
+@Entity
+public class Andamento implements Validavel,Serializable {
+    
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private long id;
+    @Temporal(TemporalType.DATE)
     private Date dataModificacao;
+    @Temporal(TemporalType.DATE)
     private Date dataPrevistaConclusao;
     private String descricao;
 
-    private long idPacote;
-    private long idEstado;
-    private long idUsuarioRemetente;    // Usuario responsável pela ação que criou o andamento
-    private long idUsuarioDestinatario; // Usuário que ficará responsável pelo pacote após a ação 
-
-    //transient
+    @ManyToOne
     private Pacote pacote;
+    @ManyToOne
     private Estado estado;
-    private Usuario usuarioRemetente;
-    private Usuario usuarioDestinatario;
+    @ManyToOne
+    private Usuario remetente;
+    @ManyToOne
+    private Usuario destinatario;
 
-    public long getIdEstado() {
-        return idEstado;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdEstado(long idEstado) {
-        this.idEstado = idEstado;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-        if (estado != null) {
-            this.idEstado = estado.getId();
-        }
-    }
-
-    public Pacote getPacote() {
-        return pacote;
-    }
-
-    public void setPacote(Pacote pacote) {
-        this.pacote = pacote;
-    }
-
-    public long getIdPacote() {
-        return idPacote;
-    }
-
-    public void setIdPacote(long idPacote) {
-        this.idPacote = idPacote;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getDataModificacao() {
@@ -85,50 +71,36 @@ public class Andamento implements Validavel {
         this.descricao = descricao;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public Pacote getPacote() {
+        return pacote;
     }
 
-    public long getId() {
-        return this.id;
+    public void setPacote(Pacote pacote) {
+        this.pacote = pacote;
     }
 
-    public long getIdUsuarioRemetente() {
-        return idUsuarioRemetente;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setIdUsuarioRemetente(long idUsuarioRemetente) {
-        this.idUsuarioRemetente = idUsuarioRemetente;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
-    public long getIdUsuarioDestinatario() {
-        return idUsuarioDestinatario;
+    public Usuario getRemetente() {
+        return remetente;
     }
 
-    public void setIdUsuarioDestinatario(long idUsuarioDestinatario) {
-        this.idUsuarioDestinatario = idUsuarioDestinatario;
+    public void setRemetente(Usuario remetente) {
+        this.remetente = remetente;
     }
 
-    public Usuario getUsuarioRemetente() {
-        return usuarioRemetente;
+    public Usuario getDestinatario() {
+        return destinatario;
     }
 
-    public void setUsuarioRemetente(Usuario usuarioRemetente) {
-        this.usuarioRemetente = usuarioRemetente;
-        if (usuarioRemetente != null) {
-            this.idUsuarioRemetente = usuarioRemetente.getId();
-        }
-    }
-
-    public Usuario getUsuarioDestinatario() {
-        return usuarioDestinatario;
-    }
-
-    public void setUsuarioDestinatario(Usuario usuarioDestinatario) {
-        this.usuarioDestinatario = usuarioDestinatario;
-        if(usuarioDestinatario!=null){
-            this.idUsuarioDestinatario=usuarioDestinatario.getId();
-        }
+    public void setDestinatario(Usuario destinatario) {
+        this.destinatario = destinatario;
     }
 
     @Override
@@ -140,7 +112,7 @@ public class Andamento implements Validavel {
         if (pacote == null) {
             inconsistencias.add("Pacote não informado");
         }
-        if (usuarioRemetente == null) {
+        if (remetente == null) {
             inconsistencias.add("Autor não informado");
         }
         return inconsistencias;
