@@ -1,5 +1,7 @@
 package br.ufg.inf.fabrica.pac.dominio;
 
+import javax.persistence.ManyToOne;
+
 /**
  *
  * @author Danillo
@@ -11,7 +13,9 @@ public class Transicao {
     private long idEstadoOrigem;
     private long idEstadoDestino;
 
+    @ManyToOne
     private Estado estadoOrigem;
+    @ManyToOne
     private Estado estadoDestino;
 
     public Transicao() {

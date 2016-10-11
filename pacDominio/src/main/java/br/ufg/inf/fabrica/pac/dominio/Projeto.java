@@ -1,20 +1,32 @@
 package br.ufg.inf.fabrica.pac.dominio;
 
 import br.ufg.inf.fabrica.pac.dominio.utils.UtilsValidacao;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author danilloguimaraes
  */
-public class Projeto implements Validavel {
+public class Projeto implements Validavel, Serializable {
 
-    private long id;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
     private String nome;
     private String descricao;
+    @Temporal(TemporalType.DATE)
     private Date dataInicio;
+    @Temporal(TemporalType.DATE)
     private Date dataTermino;
     private String patrocinador;
     private String stakeholders;
@@ -67,11 +79,11 @@ public class Projeto implements Validavel {
         this.stakeholders = stakeholders;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
 

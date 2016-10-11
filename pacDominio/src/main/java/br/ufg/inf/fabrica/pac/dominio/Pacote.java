@@ -9,50 +9,51 @@ package br.ufg.inf.fabrica.pac.dominio;
  * "Transient"
  */
 import br.ufg.inf.fabrica.pac.dominio.utils.UtilsValidacao;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author danilloguimaraes
  */
-public class Pacote implements Validavel{
+public class Pacote implements Validavel, Serializable {
 
-    private long id;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String nome;
     private String descricao;
     private Date dataCriacao;
     private boolean abandonado;
     private String documento;
     private Date dataPrevistaRealizacao;
-    private long idEstado;
-    private long idProjeto;
-    private long idUsuario;
 
-    //transient
+    @ManyToOne
     private Estado estado;
+    @ManyToOne
     private Usuario usuario;
+    @ManyToOne
     private Projeto projeto;
+    @OneToMany
     private List<Long> andamentos;
 
     public Pacote() {
         andamentos = new ArrayList<>();
     }
 
-    public long getIdEstado() {
-        return idEstado;
-    }
-
-    public void setIdEstado(long idEstado) {
-        this.idEstado = idEstado;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -104,22 +105,6 @@ public class Pacote implements Validavel{
         this.dataPrevistaRealizacao = dataPrevistaRealizacao;
     }
 
-    public long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public long getIdProjeto() {
-        return idProjeto;
-    }
-
-    public void setIdProjeto(long idProjeto) {
-        this.idProjeto = idProjeto;
-    }
-
     public List<Long> getAndamentos() {
         return andamentos;
     }
@@ -134,8 +119,6 @@ public class Pacote implements Validavel{
 
     public void setEstado(Estado estado) {
         this.estado = estado;
-        if(estado!=null)
-            this.idEstado = estado.getId();
     }
 
     public Usuario getUsuario() {

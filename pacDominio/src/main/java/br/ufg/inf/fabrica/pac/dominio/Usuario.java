@@ -1,30 +1,37 @@
 package br.ufg.inf.fabrica.pac.dominio;
 
 import br.ufg.inf.fabrica.pac.dominio.utils.Utils;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 /**
  *
  * @author danilloguimaraes
  */
-public class Usuario implements Validavel{
+public class Usuario implements Validavel, Serializable {
 
-    //Id não é gerado automaticamente, ele é gerado pelo ldap
-    private long id;
+    private static final long serialVersionUID = 1L;
+    @Id
+    private Long id;
     private boolean ativo;
 
-    //Transient
+    @Transient
     private String login;
+    @Transient
     private String senha;
+    @Transient
     private String nome;
+    @Transient
     private String email;
     
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

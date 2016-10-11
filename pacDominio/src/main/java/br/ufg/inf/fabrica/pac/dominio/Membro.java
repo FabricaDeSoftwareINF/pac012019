@@ -1,34 +1,35 @@
 package br.ufg.inf.fabrica.pac.dominio;
 
+import java.io.Serializable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  *
  * @author Danillo
  */
-public class Membro {
+public class Membro implements Serializable {
 
-    private long idUsuario;
-    private long idProjeto;
-    private long idPapel;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    //Transient
+    @ManyToOne
     private Usuario usuario;
+    @ManyToOne
     private Projeto projeto;
+    @ManyToOne
     private Papel papel;
 
-    public long getIdUsuario() {
-        return idUsuario;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdUsuario(long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public long getIdProjeto() {
-        return idProjeto;
-    }
-
-    public void setIdProjeto(long idProjeto) {
-        this.idProjeto = idProjeto;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Usuario getUsuario() {
@@ -45,14 +46,6 @@ public class Membro {
 
     public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
-    }
-
-    public long getIdPapel() {
-        return idPapel;
-    }
-
-    public void setIdPapel(long idPapel) {
-        this.idPapel = idPapel;
     }
 
     public Papel getPapel() {
