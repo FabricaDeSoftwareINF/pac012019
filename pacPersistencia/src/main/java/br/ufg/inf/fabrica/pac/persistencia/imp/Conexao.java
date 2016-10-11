@@ -1,8 +1,8 @@
 package br.ufg.inf.fabrica.pac.persistencia.imp;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -10,21 +10,13 @@ import java.sql.SQLException;
  */
 public class Conexao {
 
+    private static final EntityManagerFactory factory = Persistence.
+            createEntityManagerFactory("PU-PAC");
     private Conexao() {
 
     }
 
-    public static Connection getConnection() throws SQLException {
-        return Conexao.getConnection(false);
-    }
-
-    public static Connection getConnection(boolean controleTransacao) throws SQLException {
-        String dbUrl = "jdbc:mysql://localhost:3306/pac?zeroDateTimeBehavior=convertToNull";
-        String user = "pac";
-        String senha = "pac";
-        DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-        Connection con = DriverManager.getConnection(dbUrl, user, senha);
-        con.setAutoCommit(!controleTransacao);
-        return con;
+    public static EntityManager getEntityManager(){
+        return factory.createEntityManager();
     }
 }
