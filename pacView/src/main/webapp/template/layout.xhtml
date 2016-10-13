@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <!--Bootstrap-->
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
+    </h:head> 
+    <h:body>
+        <div>
+            <div id="cabecalho">
+                <ui:insert name="cabecalho">
+                    <ui:include src="/template/cabecalho.xhtml"/>
+                </ui:insert>
+            </div>
+            
+            <div id="contexto">
+                <ui:insert name="contexto">
+                    <ui:include src="/template/contexto.xhtml"/>
+                </ui:insert>
+            </div>
+            
+            <div id="menu">
+                <ui:insert name="menu">
+                    <ui:include src="/template/menu.xhtml"/>
+                </ui:insert>
+            </div>
+
+            <div id="conteudo">
+                <ui:insert name="conteudo"> 
+                    <ui:include src="/template/conteudo.xhtml"/>
+                </ui:insert>
+            </div>
+
+            <div id="rodape">
+                <ui:insert name="rodape">
+                    <ui:include src="/template/rodape.xhtml"/>
+                </ui:insert>
+            </div>
+        </div>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="resources/js/bootstrap.min.js"></script>
+    </h:body>
+</html>
+
