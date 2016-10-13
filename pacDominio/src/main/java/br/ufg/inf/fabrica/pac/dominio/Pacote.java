@@ -41,7 +41,7 @@ public class Pacote implements Validavel, Serializable {
     @ManyToOne
     private Projeto projeto;
     @OneToMany
-    private List<Long> andamentos;
+    private List<Andamento> andamentos;
 
     public Pacote() {
         andamentos = new ArrayList<>();
@@ -103,11 +103,11 @@ public class Pacote implements Validavel, Serializable {
         this.dataPrevistaRealizacao = dataPrevistaRealizacao;
     }
 
-    public List<Long> getAndamentos() {
+    public List<Andamento> getAndamentos() {
         return andamentos;
     }
 
-    public void setAndamentos(List<Long> andamentos) {
+    public void setAndamentos(List<Andamento> andamentos) {
         this.andamentos = andamentos;
     }
 
