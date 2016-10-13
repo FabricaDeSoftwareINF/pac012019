@@ -25,4 +25,48 @@ public class GestorDeEstados {
             return false;
         }
     }
+    
+    public boolean alterar(Estado estado){
+        if(estado==null){
+            throw new IllegalArgumentException("Estado não informado");
+        }
+        DaoEstado dao = new DaoEstado();
+        try{
+            dao.alterar(estado);
+            return true;
+        }catch(Exception ex){
+            Logger.getLogger(GestorDeEstados.class.getName()).
+                    log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
+    public boolean excluir(Estado estado){
+        if(estado==null){
+            throw new IllegalArgumentException("Estado não informado");
+        }
+        DaoEstado dao = new DaoEstado();
+        try{
+            dao.excluir(estado);
+            return true;
+        }catch(Exception ex){
+            Logger.getLogger(GestorDeEstados.class.getName()).
+                    log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public Estado buscar(Long id) {
+        if(id==0){
+            throw new IllegalArgumentException("Identificador não informado");
+        }
+        DaoEstado dao = new DaoEstado();
+        try{
+            return dao.buscar(id);
+        }catch(Exception ex){
+            Logger.getLogger(GestorDeEstados.class.getName()).
+                    log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

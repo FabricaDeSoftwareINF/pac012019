@@ -9,10 +9,25 @@ import javax.persistence.EntityTransaction;
  *
  * @author Danillo
  */
-public class BasicDao implements IDao{
+public abstract class BasicDao implements IDao{
 
     @Override
     public boolean salvar(Object entity) {
+        EntityManager em = Conexao.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try{
+            tx.begin();
+            em.persist(entity);
+            tx.commit();
+            return true;
+        }catch(Exception ex){
+            UtilPersistencia.registraLogException(ex);
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean alterar(Object entity) {
         EntityManager em = Conexao.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try{
@@ -41,9 +56,14 @@ public class BasicDao implements IDao{
         }
     }
 
-    @Override
-    public Object buscar(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public <T> T buscar(Class klass, long id) {
+        EntityManager em = Conexao.getEntityManager();
+        try{
+            return (T) em.find(klass, id);
+        }catch(Exception ex){
+            UtilPersistencia.registraLogException(ex);
+            return null;
+        }
     }
     
 }

@@ -24,7 +24,7 @@ public class SrvEstado implements ICrud<Estado> {
 
     @Override
     public Resposta<Boolean> cadastrar(Usuario solicitante, Estado estado) {
-        String recursoId = "cadastro_estado";
+        String recursoId = "cadastrar_estado";
         if (solicitante == null) {
             return Resposta.novaInstanciaDeInsucesso("Informe solicitante");
         }
@@ -46,17 +46,72 @@ public class SrvEstado implements ICrud<Estado> {
     }
 
     @Override
-    public Resposta<Boolean> excluir(Usuario solicitante, Estado entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); 
-        //To change body of generated methods, choose Tools | Templates.
+    public Resposta<Boolean> excluir(Usuario solicitante, Estado estado) {
+        String recursoId = "excluir_estado";
+        if (solicitante == null) {
+            return Resposta.novaInstanciaDeInsucesso("Informe solicitante");
+        }
+        Autorizador autorizador = new Autorizador();
+        if (autorizador.autorizarAcesso(solicitante, recursoId)) {
+            GestorDeEstados gestor = new GestorDeEstados();
+            try {
+                gestor.excluir(estado);
+                return Resposta.novaInstanciaDeSucesso(true);
+            } catch (Exception ex) {
+                Logger.getLogger(SrvEstado.class.getName()).
+                        log(Level.SEVERE, null, ex);
+                return Resposta.novaInstanciaDeSucesso(
+                        "Falha ao excluir estado");
+            }
+        } else {
+            return Resposta.novaInstanciaDeInsucesso("Recurso não autorizado");
+        }
     }
 
     @Override
-    public Resposta<Boolean> alterar(Usuario solicitante, Estado entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); 
-        //To change body of generated methods, choose Tools | Templates.
+    public Resposta<Boolean> alterar(Usuario solicitante, Estado estado) {
+        String recursoId = "alterar_estado";
+        if (solicitante == null) {
+            return Resposta.novaInstanciaDeInsucesso("Informe solicitante");
+        }
+        Autorizador autorizador = new Autorizador();
+        if (autorizador.autorizarAcesso(solicitante, recursoId)) {
+            GestorDeEstados gestor = new GestorDeEstados();
+            try {
+                gestor.alterar(estado);
+                return Resposta.novaInstanciaDeSucesso(true);
+            } catch (Exception ex) {
+                Logger.getLogger(SrvEstado.class.getName()).
+                        log(Level.SEVERE, null, ex);
+                return Resposta.novaInstanciaDeSucesso(
+                        "Falha ao alterar estado");
+            }
+        } else {
+            return Resposta.novaInstanciaDeInsucesso("Recurso não autorizado");
+        }
     }
 
+    public Resposta<Estado> buscar(Usuario solicitante, Long id){
+        String recursoId = "buscar_estado";
+        if (solicitante == null) {
+            return Resposta.novaInstanciaDeInsucesso("Informe solicitante");
+        }
+        Autorizador autorizador = new Autorizador();
+        if (autorizador.autorizarAcesso(solicitante, recursoId)) {
+            GestorDeEstados gestor = new GestorDeEstados();
+            try {
+                Estado estado = gestor.buscar(id);
+                return Resposta.novaInstanciaDeSucesso(estado);
+            } catch (Exception ex) {
+                Logger.getLogger(SrvEstado.class.getName()).
+                        log(Level.SEVERE, null, ex);
+                return Resposta.novaInstanciaDeSucesso(
+                        "Falha ao alterar estado");
+            }
+        } else {
+            return Resposta.novaInstanciaDeInsucesso("Recurso não autorizado");
+        }
+    }
     
     public static void main(String[] args) {
         Usuario usuario = new Usuario();

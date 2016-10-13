@@ -8,7 +8,9 @@ public interface IDao {
     
     public boolean salvar(Object entity);
     
+    public boolean alterar(Object entity);
+    
     public boolean excluir(Object entity);
     
-    public Object buscar(long id);
+    public <T> T buscar(long id);
 }
