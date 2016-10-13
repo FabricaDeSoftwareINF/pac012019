@@ -1,6 +1,7 @@
 package br.ufg.inf.fabrica.pac.persistencia;
 
 import br.ufg.inf.fabrica.pac.persistencia.imp.Conexao;
+import br.ufg.inf.fabrica.pac.persistencia.util.UtilPersistencia;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -20,6 +21,7 @@ public class BasicDao implements IDao{
             tx.commit();
             return true;
         }catch(Exception ex){
+            UtilPersistencia.registraLogException(ex);
             return false;
         }
     }
@@ -34,6 +36,7 @@ public class BasicDao implements IDao{
             tx.commit();
             return true;
         }catch(Exception ex){
+            UtilPersistencia.registraLogException(ex);
             return false;
         }
     }
