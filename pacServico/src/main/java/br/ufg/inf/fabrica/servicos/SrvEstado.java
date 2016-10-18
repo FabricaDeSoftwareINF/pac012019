@@ -112,20 +112,4 @@ public class SrvEstado implements ICrud<Estado> {
             return Resposta.novaInstanciaDeInsucesso("Recurso não autorizado");
         }
     }
-    
-    public static void main(String[] args) {
-        Usuario usuario = new Usuario();
-        usuario.setLogin("danillo");
-        usuario.setSenha("ollinad10");
-        
-        Estado estado = new Estado();
-        estado.setNome("novo");
-        estado.setEstadoFinal(true);
-        estado.setPermiteDelegacao(true);
-        estado.setDescricao("Estado de um pacote sem esforço gasto");
-        
-        SrvEstado srvEstado = new SrvEstado();
-        srvEstado.cadastrar(usuario, estado);
-        System.out.println("....ok....");
-    }
 }
