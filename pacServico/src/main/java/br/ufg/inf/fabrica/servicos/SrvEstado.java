@@ -112,4 +112,27 @@ public class SrvEstado implements ICrud<Estado> {
             return Resposta.novaInstanciaDeInsucesso("Recurso não autorizado");
         }
     }
+
+    public Resposta<List<Estado>> listar(Usuario solicitante) {
+        String recursoId = "listar_estado";
+        if (solicitante == null) {
+            return Resposta.novaInstanciaDeInsucesso("Informe solicitante");
+        }
+        Autorizador autorizador = new Autorizador();
+        if (autorizador.autorizarAcesso(solicitante, recursoId)) {
+            GestorDeEstados gestor = new GestorDeEstados();
+            try {
+                List<Estado> estados = gestor.listar();
+                return Resposta.novaInstanciaDeSucesso(estados);
+            } catch (Exception ex) {
+                Logger.getLogger(SrvEstado.class.getName()).
+                        log(Level.SEVERE, null, ex);
+                return Resposta.novaInstanciaDeSucesso(
+                        "Falha ao cadastrar novo estado");
+            }
+        } else {
+            return Resposta.novaInstanciaDeInsucesso("Recurso não autorizado");
+        }
+    }
+
 }

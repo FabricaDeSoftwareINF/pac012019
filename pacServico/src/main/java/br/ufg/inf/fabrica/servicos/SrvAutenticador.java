@@ -3,6 +3,7 @@ package br.ufg.inf.fabrica.servicos;
 import br.ufg.inf.fabrica.ldapinfautenticador.ILdapAutenticador;
 import br.ufg.inf.fabrica.ldapinfautenticador.imp.LdapAutenticador;
 import br.ufg.inf.fabrica.pac.dominio.Usuario;
+import br.ufg.inf.fabrica.pac.negocio.imp.GestorDeCredenciais;
 import br.ufg.inf.fabrica.servicos.util.Resposta;
 import br.ufg.inf.fabrica.servicos.util.UtilsServicos;
 import java.io.FileReader;
@@ -27,11 +28,17 @@ public class SrvAutenticador {
             
             ILdapAutenticador autenticador = new LdapAutenticador(prop, 
                     credencial.getLogin(), credencial.getSenha());
-            return Resposta.novaInstanciaDeSucesso(Boolean.TRUE);
+            if(autenticador.isCredencialValida()){
+                credencial.setId(autenticador.getId());
+                credencial.setNome(autenticador.getNome());
+                credencial.setEmail(autenticador.getEmail());
+                GestorDeCredenciais gestor = new GestorDeCredenciais();
+                return Resposta.novaInstanciaDeSucesso(gestor.autenticar(credencial));
+            }
         } catch (IOException | NamingException ex) {
             Logger.getLogger(SrvAutenticador.class.getName()).log(Level.SEVERE, null, ex);
-            return Resposta.novaInstanciaDeSucesso(Boolean.FALSE);
         }
+        return Resposta.novaInstanciaDeSucesso(Boolean.FALSE);
     }
 
 }

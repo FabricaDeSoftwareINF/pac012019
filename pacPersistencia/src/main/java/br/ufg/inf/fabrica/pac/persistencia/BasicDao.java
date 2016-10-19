@@ -2,8 +2,10 @@ package br.ufg.inf.fabrica.pac.persistencia;
 
 import br.ufg.inf.fabrica.pac.persistencia.imp.Conexao;
 import br.ufg.inf.fabrica.pac.persistencia.util.UtilPersistencia;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 /**
  *
@@ -66,4 +68,32 @@ public abstract class BasicDao implements IDao{
         }
     }
     
+    public <T> T buscar(Class klass, String fieldName, Object value){
+        EntityManager em = Conexao.getEntityManager();
+        try{
+            StringBuilder sb = new StringBuilder();
+            sb.append("select e from ").append(klass.getSimpleName()).append(" where ").append(fieldName);
+            if(value instanceof String){
+                sb.append(" like '").append(value.toString()).append("'");
+            } else {
+                sb.append("=").append(value.toString());
+            }
+            Query q = em.createQuery(sb.toString());
+            return (T) UtilPersistencia.getSingleResult(q);
+        }catch(Exception ex){
+            UtilPersistencia.registraLogException(ex);
+            return null;
+        }
+    }
+    
+    public <T> List<T> listar(Class klass){
+        EntityManager em = Conexao.getEntityManager();
+        try{
+            return (List<T>) (T) em.createQuery("select e from " + 
+                    klass.getSimpleName()).getResultList();
+        }catch(Exception ex){
+            UtilPersistencia.registraLogException(ex);
+            return null;
+        }
+    }
 }

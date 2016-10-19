@@ -2,6 +2,7 @@ package br.ufg.inf.fabrica.pac.negocio.imp;
 
 import br.ufg.inf.fabrica.pac.dominio.Estado;
 import br.ufg.inf.fabrica.pac.persistencia.DaoEstado;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,6 +57,17 @@ public class GestorDeEstados {
         }
     }
 
+    public List<Estado> listar(){
+        DaoEstado dao = new DaoEstado();
+        try{
+            return dao.listar();
+        }catch(Exception ex){
+            Logger.getLogger(GestorDeEstados.class.getName()).
+                    log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public Estado buscar(Long id) {
         if(id==0){
             throw new IllegalArgumentException("Identificador não informado");

@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <title>Controle de Pacotes - PAC</title>
@@ -12,6 +13,27 @@
         <ui:composition template="/template/layout.xhtml">
             <ui:define name="conteudo">
                 <h2>Listagem de estados</h2>
+                <h:form>
+                    <p:dataTable var="estado" value="#{beanEstado.estados}">
+
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{estado.nome}" />
+                        </p:column>
+
+                        <p:column headerText="Final">
+                            <p:selectBooleanCheckbox value="#{estado.estadoFinal}"
+                                                     disabled="true"/>
+                        </p:column>
+
+                        <p:column headerText="Ações">
+                            <h:commandLink value="Visualizar" action="#"/> 
+                            &nbsp;
+                            <h:commandLink value="Alterar" action="#"/>
+                        </p:column>
+                    </p:dataTable>
+                    <h:commandButton value="Cadastrar" 
+                                     action="#{beanEstado.prepararCadastro()}"/>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>

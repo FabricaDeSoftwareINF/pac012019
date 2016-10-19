@@ -13,4 +13,6 @@ public interface IDao {
     public boolean excluir(Object entity);
     
     public <T> T buscar(long id);
+    
+    public <T> T buscar (String fieldName, Object value);
 }

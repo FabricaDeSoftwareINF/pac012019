@@ -10,13 +10,15 @@ import javax.persistence.Persistence;
  */
 public class Conexao {
 
-    private static final EntityManagerFactory factory = Persistence.
-            createEntityManagerFactory("PU-PAC");
+    private static EntityManagerFactory factory;
     private Conexao() {
-
+        
     }
 
     public static EntityManager getEntityManager(){
+        if(factory==null){
+            factory = Persistence.createEntityManagerFactory("PU-PAC");
+        }
         return factory.createEntityManager();
     }
 }
