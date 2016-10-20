@@ -2,6 +2,7 @@ package br.ufg.inf.fabrica.pac.persistencia.util;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 /**
@@ -26,6 +27,12 @@ public class UtilPersistencia {
             Logger.getLogger(UtilPersistencia.class.getName()).log(Level.SEVERE, 
                     null, ex);
             return null;
+        }
+    }
+
+    public static void fecharEntityManager(EntityManager em){
+        if(em!=null && em.isOpen()){
+            em.close();
         }
     }
 }

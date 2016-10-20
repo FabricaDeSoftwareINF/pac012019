@@ -17,7 +17,8 @@
                     <p:dataTable var="estado" value="#{beanEstado.estados}">
 
                         <p:column headerText="Nome">
-                            <h:outputText value="#{estado.nome}" />
+                            <p:commandLink value="#{estado.nome}" 
+                                           action="#{beanEstado.visualizar(estado)}"/>
                         </p:column>
 
                         <p:column headerText="Final">
@@ -26,9 +27,10 @@
                         </p:column>
 
                         <p:column headerText="Ações">
-                            <h:commandLink value="Visualizar" action="#"/> 
+                            <h:commandLink value="Visualizar" action="#{beanEstado.visualizar(estado)}"/> 
                             &nbsp;
-                            <h:commandLink value="Alterar" action="#"/>
+                            <h:commandLink value="Alterar" 
+                                           action="#{beanEstado.prepararAlteracao(estado)}"/>
                         </p:column>
                     </p:dataTable>
                     <h:commandButton value="Cadastrar" 

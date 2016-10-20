@@ -16,9 +16,15 @@ import java.util.logging.Logger;
  */
 public class SrvEstado implements ICrud<Estado> {
 
+    private final GestorDeEstados gestor;
+
+    public SrvEstado() {
+        this.gestor = new GestorDeEstados();
+    }
+
     @Override
     public Resposta<List<Estado>> consultar(Usuario solicitante) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet.");
         //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -30,7 +36,6 @@ public class SrvEstado implements ICrud<Estado> {
         }
         Autorizador autorizador = new Autorizador();
         if (autorizador.autorizarAcesso(solicitante, recursoId)) {
-            GestorDeEstados gestor = new GestorDeEstados();
             try {
                 gestor.cadastrar(estado);
                 return Resposta.novaInstanciaDeSucesso(true);
@@ -53,7 +58,6 @@ public class SrvEstado implements ICrud<Estado> {
         }
         Autorizador autorizador = new Autorizador();
         if (autorizador.autorizarAcesso(solicitante, recursoId)) {
-            GestorDeEstados gestor = new GestorDeEstados();
             try {
                 gestor.excluir(estado);
                 return Resposta.novaInstanciaDeSucesso(true);
@@ -76,7 +80,6 @@ public class SrvEstado implements ICrud<Estado> {
         }
         Autorizador autorizador = new Autorizador();
         if (autorizador.autorizarAcesso(solicitante, recursoId)) {
-            GestorDeEstados gestor = new GestorDeEstados();
             try {
                 gestor.alterar(estado);
                 return Resposta.novaInstanciaDeSucesso(true);
@@ -91,14 +94,13 @@ public class SrvEstado implements ICrud<Estado> {
         }
     }
 
-    public Resposta<Estado> buscar(Usuario solicitante, Long id){
+    public Resposta<Estado> buscar(Usuario solicitante, Long id) {
         String recursoId = "buscar_estado";
         if (solicitante == null) {
             return Resposta.novaInstanciaDeInsucesso("Informe solicitante");
         }
         Autorizador autorizador = new Autorizador();
         if (autorizador.autorizarAcesso(solicitante, recursoId)) {
-            GestorDeEstados gestor = new GestorDeEstados();
             try {
                 Estado estado = gestor.buscar(id);
                 return Resposta.novaInstanciaDeSucesso(estado);
@@ -120,7 +122,7 @@ public class SrvEstado implements ICrud<Estado> {
         }
         Autorizador autorizador = new Autorizador();
         if (autorizador.autorizarAcesso(solicitante, recursoId)) {
-            GestorDeEstados gestor = new GestorDeEstados();
+
             try {
                 List<Estado> estados = gestor.listar();
                 return Resposta.novaInstanciaDeSucesso(estados);
