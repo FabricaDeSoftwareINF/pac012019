@@ -34,7 +34,7 @@ public abstract class BasicDao implements IDao{
         EntityTransaction tx = em.getTransaction();
         try{
             tx.begin();
-            em.persist(entity);
+            em.merge(entity);
             tx.commit();
             return true;
         }catch(Exception ex){
@@ -72,7 +72,8 @@ public abstract class BasicDao implements IDao{
         EntityManager em = Conexao.getEntityManager();
         try{
             StringBuilder sb = new StringBuilder();
-            sb.append("select e from ").append(klass.getSimpleName()).append(" where ").append(fieldName);
+            sb.append("select e from ").append(klass.getSimpleName()).
+                    append(" e where ").append(fieldName);
             if(value instanceof String){
                 sb.append(" like '").append(value.toString()).append("'");
             } else {
@@ -89,8 +90,10 @@ public abstract class BasicDao implements IDao{
     public <T> List<T> listar(Class klass){
         EntityManager em = Conexao.getEntityManager();
         try{
-            return (List<T>) (T) em.createQuery("select e from " + 
-                    klass.getSimpleName()).getResultList();
+            StringBuilder sql = new StringBuilder();
+            sql.append("select e from ").
+                    append(klass.getSimpleName()).append(" e");
+            return (List<T>) (T) em.createQuery(sql.toString()).getResultList();
         }catch(Exception ex){
             UtilPersistencia.registraLogException(ex);
             return null;
