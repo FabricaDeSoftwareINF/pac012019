@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <title>Controle de Pacotes - PAC</title>
@@ -13,8 +14,12 @@
         <ui:composition template="/template/layout.xhtml">
             <ui:define name="conteudo">
                 <h2>
-                    <h:outputText value="Cadastro de estado"/>
-                    <h:outputText value="Atualização de estado"/>
+                    <h:outputText value="Cadastro de estado"
+                                  rendered="#{beanEstado.estado.id==null || 
+                                              beanEstado.estado.id==0}"/>
+                    <h:outputText value="Atualização de estado"
+                                  rendered="#{!(beanEstado.estado.id==null || 
+                                              beanEstado.estado.id==0)}"/>
                 </h2>
                 <h:form>
                     <p>
@@ -44,17 +49,33 @@
                                                  value="#{beanEstado.estado.estadoFinal}"/>
                     </p>
                     <p>
-                        
-                        Papeis selecionados
+
+                        <p:dataTable id="gridSelectPapel" var="papel" 
+                                     value="#{beanPapel.papeis}" 
+                                     selection="#{beanEstado.estado.papeis}" 
+                                     rowKey="#{papel.id}" 
+                                     style="margin-bottom:0">
+                            <f:facet name="header">
+                                Responsabilidades
+                            </f:facet>
+                            <p:column headerText="Responsável" selectionMode="multiple" 
+                                      style="width:200px;text-align:center"/>
+                            <p:column headerText="Nome"> 
+                                <h:outputText value="#{papel.nome}" />
+                            </p:column>
+
+                        </p:dataTable>
 
                     </p>
                     <p>
                         <p:commandButton value="Cadastrar" 
                                          action="#{beanEstado.cadastrar()}"
-                                         rendered="#{beanEstado.estado.id==0}"/>
+                                         rendered="#{beanEstado.estado.id==null || 
+                                                     beanEstado.estado.id==0}"/>
                         <p:commandButton value="Atualizar" 
                                          action="#{beanEstado.cadastrar()}"
-                                         rendered="#{beanEstado.estado.id!=0}"/>
+                                         rendered="#{!(beanEstado.estado.id==null || 
+                                                     beanEstado.estado.id==0)}"/>
                     </p>
                 </h:form>
             </ui:define>

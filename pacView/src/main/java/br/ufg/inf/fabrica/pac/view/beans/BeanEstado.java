@@ -49,20 +49,21 @@ public class BeanEstado implements Serializable {
     public String listar() {
         if (beanAutenticacao == null
                 || beanAutenticacao.getUsuarioAutenticado() == null) {
-            return "login";
+            return beanAutenticacao.prepararAutenticacao();
         } else {
             Resposta<List<Estado>> resposta
                     = srv.listar(beanAutenticacao.getUsuarioAutenticado());
             if (resposta.isSucesso()) {
                 estados = resposta.getChave();
             }
-            return "estado/listagem";
+            return "/estado/listagem";
         }
     }
 
     public String prepararCadastro() {
         this.estado = new Estado();
-        estado.setEstadoFinal(true);
+        estado.setPermiteDelegacao(true);
+        estado.setEstadoFinal(false);
         return "/estado/cadastrar";
     }
 
@@ -70,7 +71,7 @@ public class BeanEstado implements Serializable {
         Resposta<Boolean> resposta;
         resposta = srv.cadastrar(beanAutenticacao.getUsuarioAutenticado(),
                 estado);
-        if (resposta.getChave()) {
+        if (resposta.isSucesso()) {
             return listar();
         } else {
             return "";
@@ -96,7 +97,7 @@ public class BeanEstado implements Serializable {
         resposta = srv.alterar(beanAutenticacao.getUsuarioAutenticado(),
                 estado);
         if (resposta.getChave()) {
-            return "listagem";
+            return listar();
         } else {
             return "";
         }
@@ -107,7 +108,7 @@ public class BeanEstado implements Serializable {
                 = srv.excluir(beanAutenticacao.getUsuarioAutenticado(), 
                         this.estado);
         if (resposta.getChave()) {
-            return "listagem";
+            return listar();
         } else {
             return "";
         }

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <title>Controle de Pacotes - PAC</title>
@@ -14,22 +15,50 @@
             <ui:define name="conteudo">
                 <h2>Cadastro de estados</h2>
                 <h:form>
-                    <h:outputText value="Nome: #{beanEstado.estado.nome}"/>
+                    <p>
+                        <h:outputLabel for="iptNome" value="Nome: "/>
+                        <br/>
+                        <h:outputText id="iptNome" 
+                                      value="#{beanEstado.estado.nome}"/>
+                    </p>
+                    <p>
+                        <h:outputLabel for="iptDescricao" value="Descrição: "/>
+                        <br/>
+                        <p:inputTextarea id="iptDescricao"
+                                         value="#{beanEstado.estado.descricao}"
+                                         disabled="true"/>
+                    </p>
+                    <p>
+                        <p:outputLabel for="iptPermiteDelegacao" 
+                                       value="Permite delegação"/>
+                        <p:selectBooleanCheckbox id="iptPermiteDelegacao"
+                                                 value="#{beanEstado.estado.permiteDelegacao}"
+                                                 disabled="true"/>
+                    </p>
+                    <p>
+                        <p:outputLabel for="iptEstadoFinal" 
+                                       value="Estado final"/>
+                        <p:selectBooleanCheckbox id="iptEstadoFinal"
+                                                 value="#{beanEstado.estado.estadoFinal}"
+                                                 disabled="true"/>
+                    </p>
                     <br/>
-                    <p:inputTextarea value="#{beanEstado.estado.descricao}"
-                                     disabled="true"/>
-                    <br/>
-                    <p:outputLabel for="iptPermiteDelegacao" 
-                                   value="Permite delegação"/>
-                    <p:selectBooleanCheckbox id="iptPermiteDelegacao"
-                                             value="#{beanEstado.estado.permiteDelegacao}"
-                                             disabled="true"/>
-                    <br/>
-                    <p:outputLabel for="iptEstadoFinal" 
-                                   value="Estado final"/>
-                    <p:selectBooleanCheckbox id="iptEstadoFinal"
-                                             value="#{beanEstado.estado.estadoFinal}"
-                                             disabled="true"/>
+                    <p:dataTable id="gridSelectPapel" var="papel" 
+                                 value="#{beanPapel.papeis}" 
+                                 selection="#{beanEstado.estado.papeis}" 
+                                 rowKey="#{papel.id}" 
+                                 style="margin-bottom:0"
+                                 disabledSelection="true">
+                        <f:facet name="header">
+                            Responsabilidades
+                        </f:facet>
+                        <p:column headerText="Responsável" selectionMode="multiple" 
+                                  style="width:200px;text-align:center"/>
+                        <p:column headerText="Nome"> 
+                            <h:outputText value="#{papel.nome}" />
+                        </p:column>
+
+                    </p:dataTable>
                     <p>
                         <p:commandButton value="Alterar" action="#{beanEstado.prepararAlteracao()}"/>
                         &nbsp;
