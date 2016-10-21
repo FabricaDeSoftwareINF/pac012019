@@ -1,5 +1,6 @@
 package br.ufg.inf.fabrica.pac.dominio;
 
+import br.ufg.inf.fabrica.pac.dominio.utils.UtilsValidacao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,11 @@ public class Papel implements Serializable, Validavel {
 
     @Override
     public List<String> validar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> erros = new ArrayList<>();
+        if(UtilsValidacao.isNullOrEmpty(nome)){
+            erros.add("nome obrigatório");
+        }
+        return erros;
     }
 
 }
