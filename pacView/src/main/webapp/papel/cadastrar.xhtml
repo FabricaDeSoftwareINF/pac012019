@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Controle de Pacotes - PAC</title>
+    </h:head>
+
+    <h:body>
+        <ui:composition template="/template/layout.xhtml">
+            <ui:define name="conteudo">
+                <h2>
+                    <h:outputText value="Cadastro de papel"
+                                  rendered="#{beanPapel.papel.id==null || 
+                                              beanPapel.papel.id==0}"/>
+                    <h:outputText value="Atualização de papel"
+                                  rendered="#{!(beanPapel.papel.id==null || 
+                                              beanPapel.papel.id==0)}"/>
+                </h2>
+                <h:form>
+                    <p>
+                        <p:outputLabel for="iptNome" value="Nome"/>
+                        <br/>
+                        <p:inputText id="iptNome" value="#{beanPapel.papel.nome}" 
+                                     placeholder="Nome"/>
+
+                    </p>
+                    <p>
+                        <p:outputLabel for="iptDescricao" value="Descrição"/>
+                        <br/>
+                        <p:inputTextarea id="iptDescricao" 
+                                         value="#{beanPapel.papel.descricao}"
+                                         placeholder="Descrição"/>
+                    </p>
+                    <p>
+                        
+                        Estados sob responsabilidade
+
+                    </p>
+                    <p>
+                        <p:commandButton value="Cadastrar" 
+                                         action="#{beanPapel.cadastrar()}"
+                                         rendered="#{beanPapel.papel.id==null || 
+                                              beanPapel.papel.id==0}"/>
+                        <p:commandButton value="Atualizar" 
+                                         action="#{beanPapel.cadastrar()}"
+                                         rendered="#{!(beanPapel.papel.id==null || 
+                                              beanPapel.papel.id==0)}"/>
+                    </p>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -56,7 +56,7 @@ public class BeanPapel implements Serializable {
             if (resposta.isSucesso()) {
                 papeis = resposta.getChave();
             }
-            return "papel/listagem";
+            return "/papel/listagem";
         }
     }
 
@@ -66,10 +66,10 @@ public class BeanPapel implements Serializable {
     }
 
     public String cadastrar() {
-        Resposta<Boolean> resposta;
+        Resposta<Boolean> resposta; 
         resposta = srv.cadastrar(beanAutenticacao.getUsuarioAutenticado(),
                 papel);
-        if (resposta.getChave()) {
+        if (resposta.isSucesso()) { 
             return listar();
         } else {
             return "";
@@ -95,7 +95,7 @@ public class BeanPapel implements Serializable {
         resposta = srv.alterar(beanAutenticacao.getUsuarioAutenticado(),
                 papel);
         if (resposta.getChave()) {
-            return "listagem";
+            return listar();
         } else {
             return "";
         }
@@ -106,7 +106,7 @@ public class BeanPapel implements Serializable {
                 = srv.excluir(beanAutenticacao.getUsuarioAutenticado(), 
                         this.papel);
         if (resposta.getChave()) {
-            return "listagem";
+            return listar();
         } else {
             return "";
         }
