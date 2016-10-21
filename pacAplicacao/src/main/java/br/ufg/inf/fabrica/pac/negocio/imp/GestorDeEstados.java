@@ -25,7 +25,7 @@ public class GestorDeEstados {
         }
         try {
             List<String> erros = estado.validar();
-            if(erros.isEmpty()){
+            if(!erros.isEmpty()){
                 return Resposta.novaInstanciaDeInsucesso(erros);
             }
             dao.salvar(estado);
@@ -43,7 +43,7 @@ public class GestorDeEstados {
         }
         try {
             List<String> erros = estado.validar();
-            if(erros.isEmpty()){
+            if(!erros.isEmpty()){
                 return Resposta.novaInstanciaDeInsucesso(erros);
             }
             dao.alterar(estado);
@@ -60,10 +60,6 @@ public class GestorDeEstados {
             return Resposta.novaInstanciaDeInsucesso("Estado nao informado");
         }
         try {
-            List<String> erros = estado.validar();
-            if(erros.isEmpty()){
-                return Resposta.novaInstanciaDeInsucesso(erros);
-            }
             dao.excluir(estado);
             return Resposta.novaInstanciaDeSucesso(Boolean.TRUE);
         } catch (Exception ex) {

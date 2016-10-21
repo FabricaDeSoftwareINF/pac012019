@@ -25,7 +25,7 @@ public class GestorDePapeis {
         }
         try {
             List<String> erros = papel.validar();
-            if(erros.isEmpty()){
+            if(!erros.isEmpty()){
                 return Resposta.novaInstanciaDeInsucesso(erros);
             }
             dao.salvar(papel);
@@ -43,7 +43,7 @@ public class GestorDePapeis {
         }
         try {
             List<String> erros = papel.validar();
-            if(erros.isEmpty()){
+            if(!erros.isEmpty()){
                 return Resposta.novaInstanciaDeInsucesso(erros);
             }
             dao.alterar(papel);
@@ -60,10 +60,6 @@ public class GestorDePapeis {
             return Resposta.novaInstanciaDeInsucesso("Papel não informado");
         }
         try {
-            List<String> erros = papel.validar();
-            if(erros.isEmpty()){
-                return Resposta.novaInstanciaDeInsucesso(erros);
-            }
             dao.excluir(papel);
             return Resposta.novaInstanciaDeSucesso(Boolean.TRUE);
         } catch (Exception ex) {
