@@ -21,7 +21,7 @@ public class GestorDeEstados {
 
     public Resposta cadastrar(Estado estado) {
         if (estado == null) {
-            throw new IllegalArgumentException("Estado não informado");
+            return Resposta.novaInstanciaDeInsucesso("Estado nao informado");
         }
         try {
             List<String> erros = estado.validar();
@@ -39,7 +39,7 @@ public class GestorDeEstados {
 
     public Resposta alterar(Estado estado) {
         if (estado == null) {
-            throw new IllegalArgumentException("Estado não informado");
+            return Resposta.novaInstanciaDeInsucesso("Estado nao informado");
         }
         try {
             List<String> erros = estado.validar();
@@ -57,7 +57,7 @@ public class GestorDeEstados {
 
     public Resposta excluir(Estado estado) {
         if (estado == null) {
-            throw new IllegalArgumentException("Estado não informado");
+            return Resposta.novaInstanciaDeInsucesso("Estado nao informado");
         }
         try {
             List<String> erros = estado.validar();
