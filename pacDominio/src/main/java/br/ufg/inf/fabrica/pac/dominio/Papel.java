@@ -1,10 +1,14 @@
 package br.ufg.inf.fabrica.pac.dominio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -21,6 +25,9 @@ public class Papel implements Serializable {
     private String nome;
 
     private String descricao;
+    
+    @ManyToMany(mappedBy = "papeis", fetch = FetchType.EAGER)
+    private List<Estado> estados = new ArrayList<>();
 
     public Papel() {
 
@@ -49,4 +56,13 @@ public class Papel implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public List<Estado> getEstados() {
+        return estados;
+    }
+
+    public void setEstados(List<Estado> estados) {
+        this.estados = estados;
+    }
+
 }

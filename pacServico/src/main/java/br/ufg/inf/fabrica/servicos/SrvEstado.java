@@ -5,7 +5,7 @@ import br.ufg.inf.fabrica.pac.dominio.Usuario;
 import br.ufg.inf.fabrica.pac.negocio.imp.GestorDeEstados;
 import br.ufg.inf.fabrica.servicos.iservicos.ICrud;
 import br.ufg.inf.fabrica.servicos.util.Autorizador;
-import br.ufg.inf.fabrica.servicos.util.Resposta;
+import br.ufg.inf.fabrica.pac.negocio.utils.Resposta;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,15 +36,7 @@ public class SrvEstado implements ICrud<Estado> {
         }
         Autorizador autorizador = new Autorizador();
         if (autorizador.autorizarAcesso(solicitante, recursoId)) {
-            try {
-                gestor.cadastrar(estado);
-                return Resposta.novaInstanciaDeSucesso(true);
-            } catch (Exception ex) {
-                Logger.getLogger(SrvEstado.class.getName()).
-                        log(Level.SEVERE, null, ex);
-                return Resposta.novaInstanciaDeSucesso(
-                        "Falha ao cadastrar novo estado");
-            }
+            return gestor.cadastrar(estado);
         } else {
             return Resposta.novaInstanciaDeInsucesso("Recurso não autorizado");
         }
@@ -58,15 +50,7 @@ public class SrvEstado implements ICrud<Estado> {
         }
         Autorizador autorizador = new Autorizador();
         if (autorizador.autorizarAcesso(solicitante, recursoId)) {
-            try {
-                gestor.excluir(estado);
-                return Resposta.novaInstanciaDeSucesso(true);
-            } catch (Exception ex) {
-                Logger.getLogger(SrvEstado.class.getName()).
-                        log(Level.SEVERE, null, ex);
-                return Resposta.novaInstanciaDeSucesso(
-                        "Falha ao excluir estado");
-            }
+            return gestor.excluir(estado);
         } else {
             return Resposta.novaInstanciaDeInsucesso("Recurso não autorizado");
         }
@@ -80,15 +64,7 @@ public class SrvEstado implements ICrud<Estado> {
         }
         Autorizador autorizador = new Autorizador();
         if (autorizador.autorizarAcesso(solicitante, recursoId)) {
-            try {
-                gestor.alterar(estado);
-                return Resposta.novaInstanciaDeSucesso(true);
-            } catch (Exception ex) {
-                Logger.getLogger(SrvEstado.class.getName()).
-                        log(Level.SEVERE, null, ex);
-                return Resposta.novaInstanciaDeSucesso(
-                        "Falha ao alterar estado");
-            }
+            return gestor.alterar(estado);
         } else {
             return Resposta.novaInstanciaDeInsucesso("Recurso não autorizado");
         }
@@ -101,15 +77,7 @@ public class SrvEstado implements ICrud<Estado> {
         }
         Autorizador autorizador = new Autorizador();
         if (autorizador.autorizarAcesso(solicitante, recursoId)) {
-            try {
-                Estado estado = gestor.buscar(id);
-                return Resposta.novaInstanciaDeSucesso(estado);
-            } catch (Exception ex) {
-                Logger.getLogger(SrvEstado.class.getName()).
-                        log(Level.SEVERE, null, ex);
-                return Resposta.novaInstanciaDeSucesso(
-                        "Falha ao alterar estado");
-            }
+            return gestor.buscar(id);
         } else {
             return Resposta.novaInstanciaDeInsucesso("Recurso não autorizado");
         }
@@ -122,16 +90,7 @@ public class SrvEstado implements ICrud<Estado> {
         }
         Autorizador autorizador = new Autorizador();
         if (autorizador.autorizarAcesso(solicitante, recursoId)) {
-
-            try {
-                List<Estado> estados = gestor.listar();
-                return Resposta.novaInstanciaDeSucesso(estados);
-            } catch (Exception ex) {
-                Logger.getLogger(SrvEstado.class.getName()).
-                        log(Level.SEVERE, null, ex);
-                return Resposta.novaInstanciaDeSucesso(
-                        "Falha ao cadastrar novo estado");
-            }
+            return gestor.listar();
         } else {
             return Resposta.novaInstanciaDeInsucesso("Recurso não autorizado");
         }

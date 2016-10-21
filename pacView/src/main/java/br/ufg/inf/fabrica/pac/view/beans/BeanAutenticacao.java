@@ -2,7 +2,7 @@ package br.ufg.inf.fabrica.pac.view.beans;
 
 import br.ufg.inf.fabrica.pac.dominio.Usuario;
 import br.ufg.inf.fabrica.servicos.SrvAutenticador;
-import br.ufg.inf.fabrica.servicos.util.Resposta;
+import br.ufg.inf.fabrica.pac.negocio.utils.Resposta;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;

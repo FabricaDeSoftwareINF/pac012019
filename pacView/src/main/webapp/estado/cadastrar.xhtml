@@ -12,24 +12,49 @@
     <h:body>
         <ui:composition template="/template/layout.xhtml">
             <ui:define name="conteudo">
-                <h2>Cadastro de estados</h2>
+                <h2>
+                    <h:outputText value="Cadastro de estado"/>
+                    <h:outputText value="Atualização de estado"/>
+                </h2>
                 <h:form>
-                    <p:inputText value="#{beanEstado.estado.nome}" placeholder="Nome"/>
-                    <br/>
-                    <p:inputTextarea value="#{beanEstado.estado.descricao}"
-                                     placeholder="Descrição"/>
-                    <br/>
-                    <p:outputLabel for="iptPermiteDelegacao" 
-                                   value="Permite delegação"/>
-                    <p:selectBooleanCheckbox id="iptPermiteDelegacao"
-                                             value="#{beanEstado.estado.permiteDelegacao}"/>
-                    <br/>
-                    <p:outputLabel for="iptEstadoFinal" 
-                                   value="Estado final"/>
-                    <p:selectBooleanCheckbox id="iptEstadoFinal"
-                                             value="#{beanEstado.estado.estadoFinal}"/>
                     <p>
-                        <p:commandButton value="Cadastrar" action="#{beanEstado.cadastrar()}"/>
+                        <p:outputLabel for="iptNome" value="Nome"/>
+                        <br/>
+                        <p:inputText id="iptNome" value="#{beanEstado.estado.nome}" 
+                                     placeholder="Nome"/>
+
+                    </p>
+                    <p>
+                        <p:outputLabel for="iptDescricao" value="Descrição"/>
+                        <br/>
+                        <p:inputTextarea id="iptDescricao" 
+                                         value="#{beanEstado.estado.descricao}"
+                                         placeholder="Descrição"/>
+                    </p>
+                    <p>
+                        <p:outputLabel for="iptPermiteDelegacao" 
+                                       value="Permite delegação"/>
+                        <p:selectBooleanCheckbox id="iptPermiteDelegacao"
+                                                 value="#{beanEstado.estado.permiteDelegacao}"/>
+                    </p>
+                    <p>
+                        <p:outputLabel for="iptEstadoFinal" 
+                                       value="Estado final"/>
+                        <p:selectBooleanCheckbox id="iptEstadoFinal"
+                                                 value="#{beanEstado.estado.estadoFinal}"/>
+                    </p>
+                    <p>
+                        
+                        Papeis selecionados
+
+                    </p>
+                    <p>
+                        <p:commandButton value="Cadastrar" 
+                                         action="#{beanEstado.cadastrar()}"
+                                         rendered="#{beanEstado.estado.id==0}"/>
+                        <p:commandButton value="Atualizar" 
+                                         action="#{beanEstado.cadastrar()}"
+                                         rendered="#{beanEstado.estado.id!=0}"/>
                     </p>
                 </h:form>
             </ui:define>

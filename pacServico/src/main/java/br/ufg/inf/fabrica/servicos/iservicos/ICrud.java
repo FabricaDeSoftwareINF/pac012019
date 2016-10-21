@@ -4,7 +4,7 @@
 package br.ufg.inf.fabrica.servicos.iservicos;
 
 import br.ufg.inf.fabrica.pac.dominio.Usuario;
-import br.ufg.inf.fabrica.servicos.util.Resposta;
+import br.ufg.inf.fabrica.pac.negocio.utils.Resposta;
 import java.util.List;
 
 /**

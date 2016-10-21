@@ -2,7 +2,7 @@ package br.ufg.inf.fabrica.pac.view.beans;
 
 import br.ufg.inf.fabrica.pac.dominio.Estado;
 import br.ufg.inf.fabrica.servicos.SrvEstado;
-import br.ufg.inf.fabrica.servicos.util.Resposta;
+import br.ufg.inf.fabrica.pac.negocio.utils.Resposta;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -71,7 +71,7 @@ public class BeanEstado implements Serializable {
         resposta = srv.cadastrar(beanAutenticacao.getUsuarioAutenticado(),
                 estado);
         if (resposta.getChave()) {
-            return "listagem";
+            return listar();
         } else {
             return "";
         }

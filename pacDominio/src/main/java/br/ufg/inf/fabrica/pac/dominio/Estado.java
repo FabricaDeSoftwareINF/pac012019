@@ -1,11 +1,15 @@
 package br.ufg.inf.fabrica.pac.dominio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -23,6 +27,9 @@ public class Estado implements Serializable, Validavel {
     private boolean estadoFinal;
     private String descricao;
     private boolean permiteDelegacao;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Papel> papeis = new ArrayList<>();
 
     public Estado() {
 
@@ -66,6 +73,14 @@ public class Estado implements Serializable, Validavel {
 
     public void setPermiteDelegacao(boolean permiteDelegacao) {
         this.permiteDelegacao = permiteDelegacao;
+    }
+
+    public List<Papel> getPapeis() {
+        return papeis;
+    }
+
+    public void setPapeis(List<Papel> papeis) {
+        this.papeis = papeis;
     }
 
     @Override

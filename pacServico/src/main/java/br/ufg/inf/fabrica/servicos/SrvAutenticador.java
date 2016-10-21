@@ -4,7 +4,7 @@ import br.ufg.inf.fabrica.ldapinfautenticador.ILdapAutenticador;
 import br.ufg.inf.fabrica.ldapinfautenticador.imp.LdapAutenticador;
 import br.ufg.inf.fabrica.pac.dominio.Usuario;
 import br.ufg.inf.fabrica.pac.negocio.imp.GestorDeCredenciais;
-import br.ufg.inf.fabrica.servicos.util.Resposta;
+import br.ufg.inf.fabrica.pac.negocio.utils.Resposta;
 import br.ufg.inf.fabrica.servicos.util.UtilsServicos;
 import java.io.FileReader;
 import java.io.IOException;

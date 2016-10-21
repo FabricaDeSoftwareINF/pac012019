@@ -1,6 +1,7 @@
 package br.ufg.inf.fabrica.pac.negocio.imp;
 
 import br.ufg.inf.fabrica.pac.dominio.Estado;
+import br.ufg.inf.fabrica.pac.negocio.utils.Resposta;
 import br.ufg.inf.fabrica.pac.persistencia.DaoEstado;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,68 +19,83 @@ public class GestorDeEstados {
         this.dao = new DaoEstado();
     }
 
-    public boolean cadastrar(Estado estado) {
+    public Resposta cadastrar(Estado estado) {
         if (estado == null) {
             throw new IllegalArgumentException("Estado não informado");
         }
         try {
+            List<String> erros = estado.validar();
+            if(erros.isEmpty()){
+                return Resposta.novaInstanciaDeInsucesso(erros);
+            }
             dao.salvar(estado);
-            return true;
+            return Resposta.novaInstanciaDeSucesso(Boolean.TRUE);
         } catch (Exception ex) {
             Logger.getLogger(GestorDeEstados.class.getName()).
                     log(Level.SEVERE, null, ex);
-            return false;
+            return Resposta.novaInstanciaDeInsucesso(ex.getMessage());
         }
     }
 
-    public boolean alterar(Estado estado) {
+    public Resposta alterar(Estado estado) {
         if (estado == null) {
             throw new IllegalArgumentException("Estado não informado");
         }
         try {
+            List<String> erros = estado.validar();
+            if(erros.isEmpty()){
+                return Resposta.novaInstanciaDeInsucesso(erros);
+            }
             dao.alterar(estado);
-            return true;
+            return Resposta.novaInstanciaDeSucesso(Boolean.TRUE);
         } catch (Exception ex) {
             Logger.getLogger(GestorDeEstados.class.getName()).
                     log(Level.SEVERE, null, ex);
-            return false;
+            return Resposta.novaInstanciaDeInsucesso(ex.getMessage());
         }
     }
 
-    public boolean excluir(Estado estado) {
+    public Resposta excluir(Estado estado) {
         if (estado == null) {
             throw new IllegalArgumentException("Estado não informado");
         }
         try {
+            List<String> erros = estado.validar();
+            if(erros.isEmpty()){
+                return Resposta.novaInstanciaDeInsucesso(erros);
+            }
             dao.excluir(estado);
-            return true;
+            return Resposta.novaInstanciaDeSucesso(Boolean.TRUE);
         } catch (Exception ex) {
             Logger.getLogger(GestorDeEstados.class.getName()).
                     log(Level.SEVERE, null, ex);
-            return false;
+            return Resposta.novaInstanciaDeInsucesso(ex.getMessage());
         }
     }
 
-    public List<Estado> listar() {
+    public Resposta<List<Estado>> listar() {
         try {
-            return dao.listar();
+            List<Estado> estados = dao.listar();
+            return Resposta.novaInstanciaDeSucesso(estados);
         } catch (Exception ex) {
             Logger.getLogger(GestorDeEstados.class.getName()).
                     log(Level.SEVERE, null, ex);
-            return null;
+            return Resposta.novaInstanciaDeInsucesso(ex.getMessage());
         }
     }
 
-    public Estado buscar(Long id) {
+    public Resposta<Estado> buscar(Long id) {
         if (id == 0) {
-            throw new IllegalArgumentException("Identificador não informado");
+            return Resposta.novaInstanciaDeInsucesso(
+                    "Identificador não informado");
         }
         try {
-            return dao.buscar(id);
+            Estado estado = dao.buscar(id);
+            return Resposta.novaInstanciaDeSucesso(estado);
         } catch (Exception ex) {
             Logger.getLogger(GestorDeEstados.class.getName()).
                     log(Level.SEVERE, null, ex);
-            return null;
+            return Resposta.novaInstanciaDeInsucesso(ex.getMessage());
         }
     }
 }

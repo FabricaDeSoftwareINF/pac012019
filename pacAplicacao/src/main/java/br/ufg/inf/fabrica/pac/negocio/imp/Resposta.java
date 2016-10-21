@@ -1,4 +1,4 @@
-package br.ufg.inf.fabrica.servicos.util;
+package br.ufg.inf.fabrica.pac.negocio.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +50,13 @@ public class Resposta <T> {
         Resposta resp = new Resposta();
         resp.setChave(null);
         resp.addItemLaudo(erro);
+        return resp;
+    }
+    
+    public static Resposta novaInstanciaDeInsucesso(List<String> erros){
+        Resposta resp = new Resposta();
+        resp.setChave(null);
+        resp.addItemLaudo(erros);
         return resp;
     }
 }
