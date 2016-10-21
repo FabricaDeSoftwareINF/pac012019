@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
  * @author Danillo
  */
 @Entity
-public class Papel implements Serializable {
+public class Papel implements Serializable, Validavel {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -63,6 +63,11 @@ public class Papel implements Serializable {
 
     public void setEstados(List<Estado> estados) {
         this.estados = estados;
+    }
+
+    @Override
+    public List<String> validar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
