@@ -70,7 +70,7 @@ public class Papel implements Serializable, Validavel {
     public List<String> validar() {
         List<String> erros = new ArrayList<>();
         if(UtilsValidacao.isNullOrEmpty(nome)){
-            erros.add("nome obrigatório");
+            erros.add("Nome não informado");
         }
         return erros;
     }

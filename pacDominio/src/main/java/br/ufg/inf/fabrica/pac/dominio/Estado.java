@@ -1,5 +1,6 @@
 package br.ufg.inf.fabrica.pac.dominio;
 
+import br.ufg.inf.fabrica.pac.dominio.utils.UtilsValidacao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +86,11 @@ public class Estado implements Serializable, Validavel {
 
     @Override
     public List<String> validar() {
-        return null;
+        List<String> erros = new ArrayList<>();
+        if(UtilsValidacao.isNullOrEmpty(nome)){
+            erros.add("Nome não informado");
+        }
+        return erros;
     }
     
 }
